@@ -13,7 +13,7 @@ import os
 import re
 import struct
 import sys
-from six import iteritems, PY3, string_types
+from six import b, iteritems, PY3, string_types
 if PY3:
     from urllib.parse import urlparse, urlencode, quote as urlquote
     from urllib.request import urlopen
@@ -308,7 +308,7 @@ class Images(object):
             makedirs(current_app.config['IMAGES_CACHE'])
             path = os.path.join(
                 current_app.config['IMAGES_CACHE'],
-                hashlib.md5(remote_url).hexdigest() + os.path.splitext(parsed.path)[1]
+                hashlib.md5(b(remote_url)).hexdigest() + os.path.splitext(parsed.path)[1]
             )
 
             if not os.path.exists(path):
